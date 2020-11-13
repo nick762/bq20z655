@@ -1,0 +1,36 @@
+######################################
+# Syntax Coloring Map For STEND
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+STEND	KEYWORD1	STEND
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+GetVol		KEYWORD2
+GetCur		KEYWORD2
+GetTemp		KEYWORD2
+GetCap		KEYWORD2
+GetC1		KEYWORD2
+GetC2		KEYWORD2
+GetC3		KEYWORD2
+GetC4		KEYWORD2
+write 		KEYWORD2
+GetData 	KEYWORD2
+SetSerial 	KEYWORD2
+GetSerial	KEYWORD2
+OpStatus	KEYWORD2
+Seal		KEYWORD2
+Unseal		KEYWORD2
+FullAccess	KEYWORD2
+SetDate		KEYWORD2
+GetDate		KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
