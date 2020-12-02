@@ -50,7 +50,7 @@ class SBS
 		uint16_t read16u(uint8_t);
 		int16_t read16(uint8_t);
 		uint16_t read16u2(uint8_t);
-		uint32_t read32u(uint8_t);
+		//uint32_t read32u(uint8_t);
 		//static void crc(int16_t);
 };
 

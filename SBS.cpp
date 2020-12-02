@@ -15,7 +15,7 @@ static const uint8_t SBS::scan(){
 			return i;
 		}
 	}
-	//return count;
+	return 0;
 }
 
 /*int SBS::type(){
@@ -82,7 +82,7 @@ uint16_t SBS::read16u2(uint8_t address)
     return registerValue;
 }    
     
-uint32_t SBS::read32u(uint8_t address)
+/*uint32_t SBS::read32u(uint8_t address)
 {
   	uint32_t registerValue;
     Wire.beginTransmission(Addr);
@@ -94,7 +94,7 @@ uint32_t SBS::read32u(uint8_t address)
     registerValue |= (Wire.read() << 16);
     registerValue |= (Wire.read() << 24);		
     return registerValue;
-}
+}*/
 
 void SBS::Seal()
 {
