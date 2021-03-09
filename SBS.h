@@ -41,6 +41,8 @@ class SBS
 		uint16_t GetSerial(void);
 		uint16_t GetDate(void);
 		void Unseal(void);
+		bool writeWord(void);
+		uint8_t readCellsNum(void);
 		void Seal(void);
 		void FullAccess(void);
 		static const uint8_t scan();

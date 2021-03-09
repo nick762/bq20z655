@@ -54,6 +54,7 @@ uint16_t SBS::read16u(uint8_t address)
    	Wire.requestFrom(Addr,2,true);
    	registerValue = Wire.read();
     registerValue |= (Wire.read()<<8); 
+	//Wire.endTransmission(true);
     return registerValue;
 }
 
@@ -95,6 +96,53 @@ uint16_t SBS::read16u2(uint8_t address)
     registerValue |= (Wire.read() << 24);		
     return registerValue;
 }*/
+
+bool SBS::writeWord()
+{
+	Wire.beginTransmission(Addr);
+	Wire.write(0x77);
+	Wire.write(lowByte(0x0040));
+	Wire.write(highByte(0x0040));
+	//Wire.write(0x40&0xFF);
+	//Wire.write((0x40>>8)&0xFF);
+	//Wire.write(0x39);
+	if(Wire.endTransmission()==0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+uint8_t SBS::readCellsNum()
+{
+	if(writeWord()){
+		uint8_t res = 0;
+		uint8_t data_page1[32];
+		Wire.beginTransmission(Addr);
+		Wire.write(0x78);
+		Wire.endTransmission(false);
+		Wire.requestFrom(Addr, 32);
+		if(Wire.available()<=32){
+			for(int i=0; i<32; i++){
+				data_page1[i] = Wire.read();      
+			}
+		}
+		//res = (((res ^ data_page1[1])<<8)^data_page1[2]);
+		//Serial.println(data_page1[2],HEX);
+		res = data_page1[2]<<6;
+		//Serial.println(res);
+		Wire.endTransmission(true);
+		if(res == 64){
+			return 2;
+		}else if(res == 128){
+			return 3;
+		}else if(res == 192){
+			return 4;
+		}
+	}else{
+		return -1;
+	}
+}
 
 void SBS::Seal()
 {

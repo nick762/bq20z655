@@ -30,7 +30,7 @@ Unseal		KEYWORD2
 FullAccess	KEYWORD2
 SetDate		KEYWORD2
 GetDate		KEYWORD2
-
+readCellsNum	KEYWORD2
 #######################################
 # Constants (LITERAL1)
 #######################################
