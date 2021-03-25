@@ -140,7 +140,7 @@ uint8_t SBS::readCellsNum()
 			return 4;
 		}
 	}else{
-		return -1;
+		return 0;
 	}
 }
 
@@ -327,6 +327,7 @@ String SBS::GetData()
 	uint8_t capacity;
 	uint16_t stat;
 	uint16_t date;
+	uint8_t  num = readCellsNum();
 	
 	voltage = GetVol();
 	if(GetCur() != voltage){
@@ -341,35 +342,25 @@ String SBS::GetData()
 	ser = GetSerial();
 	stat = OpStatus();
 	date = GetDate();
-	c1v = GetC1();
-	c2v = GetC2();
-	c3v = GetC3();
-	c4v = GetC4();	
-	//c3v = 0;
-	//c4v = 0;
-	
-	/*voltage = 16320;
-	current = 340;
-	capacity = 75;
-	fCap = 4570;
-	temperature = 22.10;
-	ser = 777;
-	stat = 1;
-	date = 1598610766;
-	c1v = 4100;
-	c2v = 3952;
-	c3v = 4023;
-	c4v = 4098;	*/
-	
-	//			0			  1				  2				 3			 4		 5		   6        7        8        9         10        11
-	
-	//{				
+	if(num == 2){
+		c1v = GetC1();
+		c2v = GetC2();
+		c3v = 0;
+		c4v = 0;
+	}else if(num ==3){
+		c1v = GetC1();
+		c2v = GetC2();
+		c3v = GetC3();
+		c4v = 0;
+	}else if(num ==4){
+		c1v = GetC1();
+		c2v = GetC2();
+		c3v = GetC3();
+		c4v = GetC4();	
+	}
+	{
 		data = voltage+comm+current+comm+temperature+comm+capacity+comm+c1v+comm+c2v+comm+c3v+comm+c4v+comm+ser+comm+stat+comm+date+comm+fCap;
-	//}
-	//{
-		//data = voltage+comm+current+comm+temperature+comm+capacity+comm+c1v+comm+c2v+comm+c3v+comm+c4v+comm+ser+comm+stat+comm+date;
-	//}
-	//delay(1000);
+	}
 	return data;
 }
 
