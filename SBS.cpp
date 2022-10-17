@@ -129,8 +129,8 @@ uint8_t SBS::readCellsNum()
 		}
 		//res = (((res ^ data_page1[1])<<8)^data_page1[2]);
 		//Serial.println(data_page1[2],HEX);
-		res = data_page1[2]<<6;
-		//Serial.println(res);
+		res = data_page1[1]<<6;
+		//Serial.println(res,HEX);
 		Wire.endTransmission(true);
 		if(res == 64){
 			return 2;
@@ -342,21 +342,31 @@ String SBS::GetData()
 	ser = GetSerial();
 	stat = OpStatus();
 	date = GetDate();
-	if(num == 2){
-		c1v = GetC1();
-		c2v = GetC2();
-		c3v = 0;
-		c4v = 0;
-	}else if(num ==3){
-		c1v = GetC1();
-		c2v = GetC2();
-		c3v = GetC3();
-		c4v = 0;
-	}else if(num ==4){
-		c1v = GetC1();
-		c2v = GetC2();
-		c3v = GetC3();
-		c4v = GetC4();	
+	switch(num){
+		case 2:
+			c1v = GetC1();
+			c2v = GetC2();
+			c3v = 0;
+			c4v = 0;
+			break;
+		case 3:
+			c1v = GetC1();
+			c2v = GetC2();
+			c3v = GetC3();
+			c4v = 0;
+			break;
+		case 4:
+			c1v = GetC1();
+			c2v = GetC2();
+			c3v = GetC3();
+			c4v = GetC4();	
+			break;
+		default:
+			c1v = 0;
+			c2v = 0;
+			c3v = 0;
+			c4v = 0;
+			break;
 	}
 	{
 		data = voltage+comm+current+comm+temperature+comm+capacity+comm+c1v+comm+c2v+comm+c3v+comm+c4v+comm+ser+comm+stat+comm+date+comm+fCap;
